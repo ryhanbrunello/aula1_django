@@ -1,3 +1,4 @@
+# coding: utf-8
 from django.shortcuts import render, HttpResponseRedirect
 from pessoa.models import Pessoa
 
@@ -21,7 +22,17 @@ def excluir(request, codigo):
 
 def pesquisar(request):
     if request.method == "GET":
-        pessoas = Pessoa.objects.filter(nome__contains=request.GET.get('busca'))
+        #pessoas = Pessoa.objects.filter(nome__icontains=request.GET.get('busca'))
+        #pessoas = Pessoa.objects.raw(select * from pessoa_pessoa)
+
+        selecao = {}#dicionario
+
+        if request.GET.get('busca'):
+            selecao['nome__icontains'] = request.GET.get('busca')
+
+        selecao['idade__gt'] = 1
+
+        pessoas = Pessoa.objects.filter(**selecao).order_by('-nome')#traço no order_by é igual a desc
 
     return render(request,'index.html', {'msg':'Resultado da Busca', 'pessoas':pessoas})
 
@@ -32,6 +43,3 @@ def editar(request, codigo):
 
     except Exception, e:
         return HttpResponseRedirect('/')
-    
-
-    
