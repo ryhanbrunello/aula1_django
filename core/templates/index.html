@@ -9,9 +9,11 @@
 
 	<form action="/inserir/" method="POST">
 		{% csrf_token %}
-		<input type="text" value"" name="nome" placeholder="Nome...">
+		<input type="text" value="{{pessoa.id}}" name="id" placeholder="ID..." readonly="true">
 		<br/>
-		<input type="text" value="" name="idade" placeholder="Idade...">
+		<input type="text" value="{{pessoa.nome}}" name="nome" placeholder="Nome...">
+		<br/>
+		<input type="text" value="{{pessoa.idade}}" name="idade" placeholder="Idade...">
 		<br/>
 		<input type="submit" value="Enviar">
 
@@ -19,7 +21,7 @@
 
 	<hr>
 
-	<form action="/pesquisa/" method="GET">
+	<form action="/pesquisar/" method="GET">
 		<input type="text" value="" name="busca" placeholder="Buscar...">
 		<br>
 		<input type="submit" value="Buscar">
@@ -28,7 +30,7 @@
 	<hr>
 
 	{% for pessoa in pessoas %}
-		<li>{{ pessoa.nome }} com {{ pessoa.idade }} anos<a href="/excluir/{{pessoa.id}}/">(X)</a></li>
+		<li><a href="/editar/{{pessoa.id}}/">{{ pessoa.nome }} com {{ pessoa.idade }} anos</a><a href="/excluir/{{pessoa.id}}/">(X)</a></li>
 	{% endfor%}
 </body>
 </html>
