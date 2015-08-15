@@ -30,7 +30,7 @@ def pesquisar(request):
         if request.GET.get('busca'):
             selecao['nome__icontains'] = request.GET.get('busca')
 
-        selecao['idade__gt'] = 1
+        selecao['idade__gt'] = 0
 
         pessoas = Pessoa.objects.filter(**selecao).order_by('-nome')#traço no order_by é igual a desc
 
