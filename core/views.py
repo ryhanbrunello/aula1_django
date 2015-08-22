@@ -2,6 +2,7 @@
 from django.shortcuts import render, HttpResponseRedirect
 from pessoa.models import Pessoa
 from pessoa.forms import PessoaFormulario
+from django.utils.translation import ugettext_lazy as _
 
 def index(request):
     pessoas = Pessoa.objects.all().order_by('nome')

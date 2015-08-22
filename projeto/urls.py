@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^caminho/link2/$','core.views.link2', name='link2'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^pessoa/',include("pessoa.urls")),
+    url(r'^i18n/', include('django.conf.urls.i18n'))
 ]

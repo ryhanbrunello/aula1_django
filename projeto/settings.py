@@ -39,7 +39,12 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 )
+
+LOCALE_PATHS = (
+        os.path.join(BASE_DIR, 'core/locale'),
+    )
 
 ROOT_URLCONF = 'projeto.urls'
 

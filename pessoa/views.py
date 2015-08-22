@@ -3,9 +3,12 @@ from django.shortcuts import render, HttpResponseRedirect
 from pessoa.models import Pessoa
 from pessoa.forms import PessoaFormulario
 from django.contrib import messages
+from django.utils.translation import ugettext_lazy as _
 
 def index(request):
-    return render(request,'conteudo.html')
+    pessoas = Pessoa.objects.all()
+    msg = _(u"Isso é uma vergonha")
+    return render(request,'conteudo.html',{'msg':msg, 'pessoas':pessoas})
 
 def inserir(request):
     if request.method == "POST":
@@ -29,7 +32,7 @@ def inserirForm(request):
 
             request.session['sessao_nome'] = dados['nome'].upper()
 
-            messages.info(request, 'Pessoa inserida com sucesso')
+            messages.info(request, _(u'Pessoa inserida com sucesso'))
             messages.success(request, 'Mais um teste!')
             form.save()
 
