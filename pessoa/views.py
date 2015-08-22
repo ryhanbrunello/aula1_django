@@ -1,6 +1,7 @@
 # coding: utf-8
 from django.shortcuts import render, HttpResponseRedirect
 from pessoa.models import Pessoa
+from pessoa.forms import PessoaFormulario
 
 def inserir(request):
     if request.method == "POST":
@@ -13,6 +14,15 @@ def inserir(request):
         pessoa.save()
 
     return HttpResponseRedirect('/')
+
+def inserirForm(request):
+    if request.method == "POST":
+        form  = PessoaFormulario(request.POST)
+
+        if form.is_valid():
+            form.save()
+
+    return render(request,'index.html',{'form':form})
 
 def excluir(request, codigo):
     pessoa = Pessoa.objects.get(pk=codigo)

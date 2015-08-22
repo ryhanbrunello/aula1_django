@@ -23,4 +23,6 @@ urlpatterns = [
     url(r'^pesquisar/', 'pessoa.views.pesquisar'),
     url(r'^editar/(?P<codigo>\d+)/$', 'pessoa.views.editar'),
     url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^form/inserirForm/$','pessoa.views.inserirForm'),
 ]

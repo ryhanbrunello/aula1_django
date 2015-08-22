@@ -21,6 +21,16 @@
 
 	<hr>
 
+	{{ form.errors }}
+	<form action="/form/inserirForm/" method="POST">
+		{% csrf_token %}
+		Nome:<input type="text" name="nome" value="{{ form.nome.value|default_if_none:'' }}" placeholder="Infome o nome..."><br/>
+		Idade:<input type="text" name="idade" value="{{ form.nome.value|default_if_none:'' }}" placeholder="Infome a idade..."><br/>
+		<input type="submit" value="Enviar">
+	</form>
+
+	<hr>
+
 	<form action="/pesquisar/" method="GET">
 		<input type="text" value="" name="busca" placeholder="Buscar...">
 		<br>
