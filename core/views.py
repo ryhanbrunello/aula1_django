@@ -13,3 +13,9 @@ def index(request):
     form = PessoaFormulario()
 
     return render(request, 'index.html', {'msg': u'É isso ai Ryhan!', 'pessoas':pessoas})
+
+def link1(request):
+    return render(request, 'link1.html')
+
+def link2(request):
+    return render(request, 'link2.html')
