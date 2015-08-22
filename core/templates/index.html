@@ -3,7 +3,7 @@
 	<title>Pagina Principal</title>
 </head>
 <body>
-	<h2>Pagina Index.</h2>
+	<h2>Pagina Index: {{ request.session.sessao_nome }}</h2>
 	{{ msg }}
 	<hr>
 
@@ -21,6 +21,14 @@
 
 	<hr>
 
+	{% if messages %}
+		<ul classe="messages">
+			{% for message in messages %}
+				<li {% if message.tags %} class="{{ message.tags }}" 
+					{% endif %}>{{ message }}</li>
+			{% endfor %}
+		<ul/>
+	{% endif %}
 	{{ form.errors }}
 	<form action="/form/inserirForm/" method="POST">
 		{% csrf_token %}

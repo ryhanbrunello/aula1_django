@@ -2,6 +2,7 @@
 from django.shortcuts import render, HttpResponseRedirect
 from pessoa.models import Pessoa
 from pessoa.forms import PessoaFormulario
+from django.contrib import messages
 
 def inserir(request):
     if request.method == "POST":
@@ -20,6 +21,13 @@ def inserirForm(request):
         form  = PessoaFormulario(request.POST)
 
         if form.is_valid():
+            dados = form.cleaned_data
+            print dados
+
+            request.session['sessao_nome'] = dados['nome'].upper()
+
+            messages.info(request, 'Pessoa inserida com sucesso')
+            messages.success(request, 'Mais um teste!')
             form.save()
 
     return render(request,'index.html',{'form':form})
