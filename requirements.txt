@@ -7,7 +7,7 @@ djangorestframework==3.2.3
 djangorestframework-filters==0.4.0
 gunicorn==19.3.0
 pystache==0.5.4
-pycopg2==2.5.1
+psycopg2==2.5.1
 static==1.1.1
 static3==0.6.1
 wsgiref==0.1.2
