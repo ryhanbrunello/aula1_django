@@ -1,0 +1,38 @@
+{% load i18n %}
+<html>
+<head>
+	<title>{% block titulo %}{% endblock %}-TITULO</title>
+</head>
+<body>
+	<div align="center"></div>
+	<h2>MENU</h2>
+	{% block menu %}{% trans 'MENU ORIGINAL' %}{% endblock %}
+	<br/>
+	<br/>
+
+	<h3>CONTEUDO</h3>
+	{% block conteudo %}{% endblock %}
+	<br/>
+	<br/>
+
+
+	<form action="/i18n/setlang/" method="POST">
+		{% csrf_token %}
+		<input name="next" type="hidden" value="/pessoa/">
+		<input name="language" type="hidden" value="pt-br">
+		<input type="submit" value="Portugues">
+	</form>	
+
+	<form action="/i18n/setlang/" method="POST">
+		{% csrf_token %}
+		<input name="next" type="hidden" value="/pessoa/">
+		<input name="language" type="hidden" value="en">
+		<input type="submit" value="English">
+	</form>	
+
+	<h4>RODAPE</h4>
+	{% block rodape %}{% endblock %}
+	<br/>
+	<br/>	
+</body>
+</html>

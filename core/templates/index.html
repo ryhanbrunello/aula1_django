@@ -1,8 +1,9 @@
 <html>
 <head>
-	<title>Pagina Principal</title>
+    <title>Pagina Principal</title>
 </head>
 <body>
+<<<<<<< HEAD
 	<h2>Pagina Index.</h2>
 	{{ msg }}
 	<hr>
@@ -38,5 +39,66 @@
 		{% endfor %}
 		</li>
 	{% endfor%}
+=======
+    <h2>Pagina Index: {{ request.session.sessao_nome }}</h2>
+    {{ msg }}
+    <hr>
+
+    <div align="center">
+        <a href="{% url 'link1' %}">Link 1</a><br/>
+        <a href="{% url 'link2' %}">Link 2</a><br/>
+    </div>
+
+    <hr>
+
+    <form action="/pessoa/inserir/" method="POST">
+        {% csrf_token %}
+        <input type="text" value="{{pessoa.id}}" name="id" placeholder="ID..." readonly="true">
+        <br/>
+        <input type="text" value="{{pessoa.nome}}" name="nome" placeholder="Nome...">
+        <br/>
+        <input type="text" value="{{pessoa.idade}}" name="idade" placeholder="Idade...">
+        <br/>
+        <input type="submit" value="Enviar">
+
+    </form>
+
+    <hr>
+
+    {% if messages %}
+        <ul classe="messages">
+            {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}" 
+                    {% endif %}>{{ message }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {{ form.errors }}
+    <form action="{% url 'inserirForm' %}" method="POST">
+        {% csrf_token %}
+        Nome:<input type="text" name="nome" value="{{ form.nome.value|default_if_none:'' }}" placeholder="Infome o nome..."><br/>
+        Idade:<input type="text" name="idade" value="{{ form.idade.value|default_if_none:'' }}" placeholder="Infome a idade..."><br/>
+        <input type="submit" value="Enviar">
+    </form>
+
+    <hr>
+
+    <form action="/pessoa/pesquisar/" method="GET">
+        <input type="text" value="" name="busca" placeholder="Buscar...">
+        <br>
+        <input type="submit" value="Buscar">
+    </form>
+
+    <hr>
+
+    {% for pessoa in pessoas %}
+        <li><a href="/pessoa/editar/{{pessoa.id}}/">{{ pessoa.nome }} com {{ pessoa.idade }} anos</a><a href="/pessoa/excluir/{{pessoa.id}}/">(X)</a>
+        {% for tel in pessoa.telefone_set.all %}
+            {{ tel.telefone }}
+        {% endfor %}
+        </li>
+    {% endfor%}
+>>>>>>> e669e4b56b417684a48290478924b150faac05ad
 </body>
 </html>
