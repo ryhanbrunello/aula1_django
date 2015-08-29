@@ -8,7 +8,8 @@ def inserir(request):
         pessoa = Pessoa(
             id = request.POST.get('id') if request.POST.get('id',None) else None,
             nome = request.POST.get('nome'),
-            idade = request.POST.get('idade'))
+            idade = request.POST.get('idade'),
+            telefone = request.POST.get('telefone'))
 
         pessoa.save()
 
