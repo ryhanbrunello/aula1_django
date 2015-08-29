@@ -22,4 +22,5 @@ urlpatterns = patterns('pessoa.views',
     url(r'^pesquisar/', 'pesquisar'),
     url(r'^editar/(?P<codigo>\d+)/$', 'editar'),
     url(r'^form/inserirForm/$','inserirForm', name='inserirForm'),
+    #url(r'^api_manual/$', 'api_manual'),
 )

@@ -33,4 +33,6 @@ urlpatterns = [
     url(r'^pessoa/',include("pessoa.urls")),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^api/', include(rota.urls)),
+    url(r'^api_manual/$', 'pessoa.views.api_manual'),
+    url(r'^api_auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

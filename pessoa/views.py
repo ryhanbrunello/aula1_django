@@ -11,6 +11,7 @@ from rest_framework import status, viewsets, filters
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 import rest_framework_filters as filtro
+from rest_framework.permissions import IsAdminUser
 
 class Filtro_Pessoa(filtro.FilterSet):
     nome = filtro.AllLookupsFilter(name='nome')
@@ -24,8 +25,32 @@ class Api_Automatica(viewsets.ModelViewSet):
     filter_backends = (filters.OrderingFilter, filters.DjangoFilterBackend,)
     ordering_fields = ('nome')
     filter_class = Filtro_Pessoa
+    permission_classes = (IsAdminUser,)
+    paginate_by = 3
 
+@api_view(['POST','GET'])
+def api_manual(request):
+    if request.method == 'POST':
+        if request.POST.get('id',None):
+            try:
+                pessoa = Pessoa.objects.get(pk=request.POST['id'])
+            except:
+                return Response("{ msg: 'Id Invalido' }", status=status.HTTP_400_BAD_REQUEST)
+        else:
+            pessoa = Pessoa()
 
+        pessoaApi = PessoaApi(pessoa, data=request.data, partial=True)
+
+        if pessoaApi.is_valid():
+            pessoaApi.save()
+            return Response(pessoaApi.data, status=status.HTTP_200_OK)
+        else:
+            return Response(pessoaApi.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'GET':
+        pessoas = Pessoa.objects.all()
+        pessoaApi = PessoaApi(pessoas, many=True)
+        return Response(pessoaApi.data)
 # FIM API
 
 
