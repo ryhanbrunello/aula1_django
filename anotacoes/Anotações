@@ -1,0 +1,45 @@
+------------
+Para Estudar
+------------
+Livro - Expressões Regulares - Aurelio Marinho Jargas (1 a 4 edição)
+Regular Expression Tester - Testes de expressão regular
+Microsoft - Visual Studio Code
+
+------------
+iniciando repositorio git
+------------
+git init
+git remote add origin https://github.com/edsonlb/testes_git.git
+git pull origin
+
+-----------
+comitando projeto
+-----------
+git add -all
+git commit -m "Inserir comentário"
+git push origin master
+
+
+----------
+Iniciando a máquina para começar a trabalhar
+----------
+Entre na pasta do projeto
+cd Treinamento
+
+Entre na pasta onde está o projeto
+cd aula1_django
+
+Comando de ativação da maquina
+source env/bin/activate
+
+Entre na pasta projeto
+cd projeto
+
+Comando para executar o servidor
+python manage.py runserver
+
+
+----------
+Iniciando o env
+----------
+source env/bin/activate
