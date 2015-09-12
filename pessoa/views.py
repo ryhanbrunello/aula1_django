@@ -1,5 +1,5 @@
 # coding: utf-8
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, HttpResponse
 from pessoa.models import Pessoa
 from pessoa.forms import PessoaFormulario
 from django.contrib import messages
@@ -12,6 +12,59 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 import rest_framework_filters as filtro
 from rest_framework.permissions import IsAdminUser
+# FIM API
+
+# CLIENTE API
+import requests
+from requests.auth import HTTPDigestAuth
+# FIM CLIENTE API
+
+# CLIENTE API DEFINIÇÕES
+def consulta_api(request):
+    r = requests.get('http://apiryhan.herokuapp.com/api/pessoa/?nome__icontains=a', 
+        auth=('admin','admin'))
+
+    print r
+    print ' '
+    print r.json()
+
+    pessoas = r.json()['results']
+
+    print pessoas
+
+    for pessoa in pessoas:
+        print pessoa['nome'] + ' = ' + str(pessoa['idade'])
+
+    return HttpResponse('SELECT - OK')
+
+def incluir_api(request):
+    valores = {'nome': 'Teste', 'idade': '85'}
+
+    r = requests.post('http://apiryhan.herokuapp.com/api/pessoa/', 
+        valores, 
+        auth=('admin','admin'))
+
+    print r.json()
+
+    return HttpResponse('INSERT - OK')
+
+def excluir_api(request):
+
+    r = requests.delete('http://apiryhan.herokuapp.com/api/pessoa/2/', auth=('admin', 'admin'))
+
+    return HttpResponse('DELETE - OK')
+
+def editar_api(request):
+    valores = {'id': '2', 'nome':'Mufasa Brunello', 'idade':'3'}
+
+    r = requests.post('http://apiryhan.herokuapp.com/api_manual/', valores, auth=('admin', 'admin'))
+
+    return HttpResponse('EDITA - OK')
+
+
+# FIM CLIENTE API DEFINIÇÕES
+
+# API
 
 class Filtro_Pessoa(filtro.FilterSet):
     nome = filtro.AllLookupsFilter(name='nome')

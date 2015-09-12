@@ -35,4 +35,8 @@ urlpatterns = [
     url(r'^api/', include(rota.urls)),
     url(r'^api_manual/$', 'pessoa.views.api_manual'),
     url(r'^api_auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^consulta/api/$', 'pessoa.views.consulta_api'),
+    url(r'^incluir/api/$', 'pessoa.views.incluir_api'),
+    url(r'^excluir/api/$', 'pessoa.views.excluir_api'),
+    url(r'^editar/api/$', 'pessoa.views.editar_api'),
 ]
